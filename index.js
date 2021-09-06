@@ -99,7 +99,7 @@ function searchByQuery(query) {
 
 function searchByDuration(duration) {
   const seconds = durationToSeconds(duration);
-  const best = { time: seconds, obj: null };
+  const best = { time: Number.MAX_VALUE, obj: null };
   player.playlists.forEach(({ id }) => {
     if (Math.abs(seconds - playlistDuration(id)) < best.time) {
       best.time = Math.abs(playlistDuration(id) - seconds);

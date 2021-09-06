@@ -24,8 +24,16 @@ function removeSong(id) {
 
 function addSong(title, album, artist, duration, id) {
   if (getSongById(id)) throw new Error('Bad ID');
-  id = id ? id : player.generateSongsId();
+  if (!id) id = player.generateSongsId();
+
+  if (!title || !album || !artist || !duration)
+    throw new Error('Must provide all args');
+
   duration = durationToSeconds(duration);
+  if (!duration || typeof duration !== 'number')
+    throw new Error(
+      'Failed parsing the duration, please provide in mm:ss format'
+    );
 
   player.songs.push({ title, album, artist, duration, id });
   return id;

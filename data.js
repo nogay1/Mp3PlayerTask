@@ -45,8 +45,12 @@ module.exports = {
   ],
   currentSongsId: 8,
   currentPlaylistId: 6,
-  generateSongsId: () => this.currentSongsId++,
-  generatePlaylistId: () => this.currentPlaylistId++,
+  generateSongsId() {
+    return this.currentSongsId++;
+  },
+  generatePlaylistId() {
+    return this.currentPlaylistId++;
+  },
   playlists: [
     { id: 1, name: 'Metal', songs: [1, 7, 4] },
     { id: 5, name: 'Israeli', songs: [4, 5] },

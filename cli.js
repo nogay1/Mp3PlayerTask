@@ -4,7 +4,7 @@ const parseCommand = () => {
   try {
     const [command, ...args] = process.argv.slice(2);
     if (!commands[command]) throw new Error('bad command');
-    const { help, action } = commands[command];
+    const { action } = commands[command];
     action(...args);
   } catch (err) {
     if (err.message === 'bad command') console.log('For help write: cli help');
@@ -44,9 +44,13 @@ const commands = {
     },
   },
   add: {
-    help: 'play [song ID]',
-    action: (arg) => {
-      player.playSong(parseInt(arg));
+    help: `
+    Adds a new song
+    Format: add [title] [artist] [album] [duration | mm:ss]
+    `,
+    action: (...args) => {
+      player.addSong(...args);
+      console.log('Added song');
     },
   },
   help: {

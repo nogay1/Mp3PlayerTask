@@ -24,7 +24,7 @@ function removeSong(id) {
 
 function addSong(title, album, artist, duration, id) {
   if (getSongById(id)) throw new Error('Bad ID');
-  id = id ?? player.generateSongsId();
+  id = id ? id : player.generateSongsId();
   duration = durationToSeconds(duration);
 
   player.songs.push({ title, album, artist, duration, id });
@@ -38,7 +38,7 @@ function removePlaylist(playlistId) {
 
 function createPlaylist(name, id) {
   if (getPlaylistById(id)) throw Error('Bad ID');
-  id = id ?? player.generatePlaylistId();
+  id = id ? id : player.generatePlaylistId();
 
   player.playlists.push({ name, id, songs: [] });
   return id;

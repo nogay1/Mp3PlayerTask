@@ -15,7 +15,7 @@ const parseCommand = () => {
 const helpFunction = (arg) => {
   if (!arg) {
     console.log(
-      `The commands are: play, romove, add, playP, removeP, addP, search, searchD, list, listP \nFor specific command info type: cli help [command]`
+      `The commands are: play, romove, add, playP, removeP, addP,editP, search, searchD, list, listP \nFor specific command info type: cli help [command]`
     );
   } else {
     if (!commands[arg]) throw new Error(`No such command: ${arg}`);
@@ -51,6 +51,35 @@ const commands = {
     action: (...args) => {
       player.addSong(...args);
       console.log('Added song');
+    },
+  },
+  playP: {
+    help: `
+    Plays a playlist by its id.
+    Format: playP [playlist ID]
+    `,
+    action: (arg) => {
+      player.playPlaylist(parseInt(arg));
+    },
+  },
+  removeP: {
+    help: `
+    Removes a playlist by its id.
+    Format: removeP [playlist ID]
+    `,
+    action: (arg) => {
+      player.removePlaylist(parseInt(arg));
+      console.log(`Removed playlist with id: ${arg}`);
+    },
+  },
+  addP: {
+    help: `
+    Adds a new empty playlist
+    Format: addP [name]
+    `,
+    action: (...args) => {
+      player.createPlaylist(...args);
+      console.log('Added playlist');
     },
   },
   help: {

@@ -132,7 +132,11 @@ const printPlaylist = (playlistId) => {
   const playlist = getPlaylistById(playlistId);
   if (!playlist) throw new Error('Bad id');
 
-  console.log(`Playlist: ${playlist.name} | ${playlistDuration(playlistId)}`);
+  console.log(
+    `Playlist: ${playlist.name} | ${formatDuration(
+      playlistDuration(playlistId)
+    )}`
+  );
   playlist.songs.forEach((song) => {
     printSong(song, ' - ');
   });

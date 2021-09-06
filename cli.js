@@ -110,13 +110,15 @@ const commands = {
       });
     },
   },
-  playP: {
+  searchD: {
     help: `
-    Plays a playlist by its id.
-    Format: playP [playlist ID]
+    Search a song/playlist by duration, returns a single result.
+    Format: searchD [duration mm:ss]
     `,
     action: (arg) => {
-      player.playPlaylist(parseInt(arg));
+      const result = player.searchByDuration(arg);
+      if (result.hasOwnProperty('album')) player.printSong(result.id);
+      else player.printPlaylist(result.id);
     },
   },
   removeP: {

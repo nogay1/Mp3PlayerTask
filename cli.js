@@ -101,7 +101,13 @@ const commands = {
     `,
     action: (...args) => {
       if (!args[0]) throw new Error('Must provide a query');
-      console.log(player.searchByQuery(args[0]));
+      const results = player.searchByQuery(args[0]);
+      results.songs.forEach(({ id }) => {
+        player.printSong(id);
+      });
+      results.playlists.forEach(({ id }) => {
+        player.printPlaylist(id);
+      });
     },
   },
   playP: {

@@ -115,14 +115,16 @@ function searchByDuration(duration) {
   return best.obj;
 }
 
-const printSong = (songId) => {
+const printSong = (songId, addon = '') => {
   const resultSong = getSongById(songId);
   if (!resultSong) throw new Error('Bad ID');
 
   const { title, album, artist, duration } = resultSong;
 
   console.log(
-    `Song ${title} from ${album} by ${artist} | ${formatDuration(duration)}.`
+    `${addon}Song "${title}", from ${album} by ${artist} | ${formatDuration(
+      duration
+    )}.`
   );
 };
 
@@ -132,7 +134,7 @@ const printPlaylist = (playlistId) => {
 
   console.log(`Playlist: ${playlist.name} | ${playlistDuration(playlistId)}`);
   playlist.songs.forEach((song) => {
-    this.printSong(song);
+    printSong(song, ' - ');
   });
 };
 

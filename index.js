@@ -67,6 +67,7 @@ function editPlaylist(playlistId, songId) {
   const { playlists } = player;
   playlistId = playlists.findIndex(({ id }) => id === playlistId);
   if (playlistId < 0) throw new Error('Bad playlist ID');
+
   if (!getSongById(songId)) throw new Error('Bad song ID');
 
   const indexInPlaylist = playlists[playlistId].songs.indexOf(songId);
@@ -91,7 +92,7 @@ function searchByQuery(query) {
   return {
     songs: getSongByQuery(query).sort((a, b) => a.title.localeCompare(b.title)),
     playlists: getPlaylistByQuery(query).sort((a, b) =>
-      a.title.localeCompare(b.title)
+      a.name.localeCompare(b.name)
     ),
   };
 }
@@ -114,6 +115,27 @@ function searchByDuration(duration) {
   return best.obj;
 }
 
+const printSong = (songId) => {
+  const resultSong = getSongById(songId);
+  if (!resultSong) throw new Error('Bad ID');
+
+  const { title, album, artist, duration } = resultSong;
+
+  console.log(
+    `Song ${title} from ${album} by ${artist} | ${formatDuration(duration)}.`
+  );
+};
+
+const printPlaylist = (playlistId) => {
+  const playlist = getPlaylistById(playlistId);
+  if (!playlist) throw new Error('Bad id');
+
+  console.log(`Playlist: ${playlist.name} | ${playlistDuration(playlistId)}`);
+  playlist.songs.forEach((song) => {
+    this.printSong(song);
+  });
+};
+
 module.exports = {
   player,
   playSong,
@@ -126,6 +148,8 @@ module.exports = {
   playlistDuration,
   searchByQuery,
   searchByDuration,
+  printSong,
+  printPlaylist,
 };
 
 const getSongById = (songId) => player.songs.find(({ id }) => id === songId);

@@ -15,7 +15,7 @@ const parseCommand = () => {
 const helpFunction = (arg) => {
   if (!arg) {
     console.log(
-      `The commands are: play, romove, add, playP, removeP, addP,editP, search, searchD, list, listP \nFor specific command info type: cli help [command]`
+      `The commands are: play, remove, add, playP, removeP, addP, editP, search, searchD, list, listP \nFor specific command info type: cli help [command]`
     );
   } else {
     if (!commands[arg]) throw new Error(`No such command: ${arg}`);
@@ -51,6 +51,57 @@ const commands = {
     action: (...args) => {
       player.addSong(...args);
       console.log('Added song');
+    },
+  },
+  playP: {
+    help: `
+    Plays a playlist by its id.
+    Format: playP [playlist ID]
+    `,
+    action: (arg) => {
+      player.playPlaylist(parseInt(arg));
+    },
+  },
+  removeP: {
+    help: `
+    Removes a playlist by its id.
+    Format: removeP [playlist ID]
+    `,
+    action: (arg) => {
+      player.removePlaylist(parseInt(arg));
+      console.log(`Removed playlist with id: ${arg}`);
+    },
+  },
+  addP: {
+    help: `
+    Adds a new empty playlist
+    Format: addP [name]
+    `,
+    action: (...args) => {
+      player.createPlaylist(...args);
+      console.log('Added playlist');
+    },
+  },
+  editP: {
+    help: `
+    Edit a playlist, if the song alredy exists removes it otherwise adds it.
+    If the song removed is the last song of the playlist the entire playlist is removed.
+    Format: editP [playlist ID] [song ID]
+    `,
+    action: (...args) => {
+      if (!args || args.length < 2) throw new Error('Must provide 2 IDs');
+      player.editPlaylist(parseInt(args[0]), parseInt(args[1]));
+      console.log(`Edited playlist with ID: ${args[0]}`);
+    },
+  },
+  search: {
+    help: `
+    Search a song/playlist with a query
+    Format: search [query] [only songs/playlist: s | p]
+    `,
+    action: (...args) => {
+      if (!args[0]) throw new Error('Must provide a query');
+      console.log(player.searchByQuery(args[0]));
     },
   },
   playP: {

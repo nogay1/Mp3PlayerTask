@@ -119,10 +119,10 @@ const printSong = (songId, addon = '') => {
   const resultSong = getSongById(songId);
   if (!resultSong) throw new Error('Bad ID');
 
-  const { title, album, artist, duration } = resultSong;
+  const { id, title, album, artist, duration } = resultSong;
 
   console.log(
-    `${addon}Song "${title}", from ${album} by ${artist} | ${formatDuration(
+    `${addon}ID: ${id} | Song "${title}", from ${album} by ${artist} | ${formatDuration(
       duration
     )}.`
   );
@@ -133,7 +133,7 @@ const printPlaylist = (playlistId) => {
   if (!playlist) throw new Error('Bad id');
 
   console.log(
-    `Playlist: ${playlist.name} | ${formatDuration(
+    `ID: ${playlist.id} | Playlist: ${playlist.name} | ${formatDuration(
       playlistDuration(playlistId)
     )}`
   );

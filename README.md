@@ -2,7 +2,7 @@
 
 An interactive cli, to control a songs and playlists state object.
 
-### [View Online](https://replit.com/@noamgolani/Mp3PlayerTask#index.js) Version using replit.
+### [View Online](https://replit.com/@noamgolani/Mp3PlayerTask?v=1) Version using replit.
 
 ### To run localy
 

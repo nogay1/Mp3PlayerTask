@@ -4,7 +4,7 @@ An interactive cli, to control a songs and playlists state object.
 
 ### [View Online](https://replit.com/@noamgolani/Mp3PlayerTask#index.js) Version using replit.
 
-## To run localy, clone the project. Then
+### To run localy
 
       git clone https://github.com/noamgolani/Mp3PlayerTask.git
 
@@ -12,7 +12,7 @@ An interactive cli, to control a songs and playlists state object.
 
       npm start
 
-### For the tests.
+### For the tests
 
       npm install
 

@@ -141,4 +141,6 @@ const commands = {
   },
 };
 
-parseCommand();
+while (1) {
+  parseCommand();
+}

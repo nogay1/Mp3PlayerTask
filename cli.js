@@ -1,21 +1,37 @@
 const player = require('./index');
+const readline = require('readline');
 
-const parseCommand = () => {
-  try {
-    const [command, ...args] = process.argv.slice(2);
-    if (!commands[command]) throw new Error('bad command');
-    const { action } = commands[command];
-    action(...args);
-  } catch (err) {
-    if (err.message === 'bad command') console.log('For help write: cli help');
-    else console.log(err.message);
-  }
-};
+const readInterface = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  prompt: 'PLAYER>',
+});
+console.log("Welcome to the Player CLI, for help type 'help'");
+
+readInterface.prompt();
+
+readInterface
+  .on('line', (line) => {
+    const [command, ...args] = line.split(' ');
+    try {
+      if (!commands[command]) throw new Error('bad command');
+      const { action } = commands[command];
+      action(...args);
+    } catch (err) {
+      if (err.message === 'bad command') console.log('For help type: help');
+      else console.log(err.message);
+    }
+    readInterface.prompt();
+  })
+  .on('close', () => {
+    console.log('Thank you for using player');
+    process.exit(0);
+  });
 
 const helpFunction = (arg) => {
   if (!arg) {
     console.log(
-      `The commands are: play, remove, add, playP, removeP, addP, editP, search, searchD, list, listP \nFor specific command info type: cli help [command]`
+      `The commands are: play, remove, add, playP, removeP, addP, editP, search, searchD, list, listP, exit \nFor specific command info type: help [command]`
     );
   } else {
     if (!commands[arg]) throw new Error(`No such command: ${arg}`);
@@ -139,8 +155,10 @@ const commands = {
     help: 'what',
     action: helpFunction,
   },
+  exit: {
+    help: 'Exits the cli',
+    action: () => {
+      process.exit(0);
+    },
+  },
 };
-
-while (1) {
-  parseCommand();
-}

@@ -2,6 +2,22 @@
 
 An interactive cli, to control a songs and playlists state object.
 
+### [View Online](https://replit.com/@noamgolani/Mp3PlayerTask#index.js) Version using replit.
+
+## To run localy, clone the project. Then
+
+      git clone https://github.com/noamgolani/Mp3PlayerTask.git
+
+      cd Mp3PlayerTask
+
+      npm start
+
+### For the tests.
+
+      npm install
+
+      npm run test
+
 ## About the project
 
 The Mp3 project, is composed out of 2 primary files. The `index.js` and `cli.js`.

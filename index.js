@@ -142,6 +142,17 @@ const printPlaylist = (playlistId) => {
   });
 };
 
+const listSongs = () => {
+  player.songs.forEach(({ id }) => {
+    printSong(id);
+  });
+};
+const listPlaylists = () => {
+  player.playlists.forEach(({ id }) => {
+    printPlaylist(id);
+  });
+};
+
 module.exports = {
   player,
   playSong,
@@ -156,6 +167,8 @@ module.exports = {
   searchByDuration,
   printSong,
   printPlaylist,
+  listSongs,
+  listPlaylists,
 };
 
 const getSongById = (songId) => player.songs.find(({ id }) => id === songId);

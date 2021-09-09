@@ -121,25 +121,19 @@ const commands = {
       else player.printPlaylist(result.id);
     },
   },
-  removeP: {
+  list: {
     help: `
-    Removes a playlist by its id.
-    Format: removeP [playlist ID]
+    List all songs in the player.
+    Format: list
     `,
-    action: (arg) => {
-      player.removePlaylist(parseInt(arg));
-      console.log(`Removed playlist with id: ${arg}`);
-    },
+    action: player.listSongs,
   },
-  addP: {
+  listP: {
     help: `
-    Adds a new empty playlist
-    Format: addP [name]
+    List all playlists in the player.
+    Format: listP
     `,
-    action: (...args) => {
-      player.createPlaylist(...args);
-      console.log('Added playlist');
-    },
+    action: player.listPlaylists,
   },
   help: {
     help: 'what',
